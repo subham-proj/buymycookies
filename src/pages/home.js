@@ -26,13 +26,13 @@ export default function Home() {
               founded by <em>Subham Singh</em> in the July of 2021.
               <Row className="register_button">
                 <Col className="button-style-2">
-                  <Button as={Link} to="/register" className="signup_button">
-                    Sign Up
+                  <Button as={Link} to="/login" className="signup_button">
+                    Log in
                   </Button>
                 </Col>
                 <Col className="button-style-2">
                   <Button as={Link} to="/register" className="signup_button">
-                    Join as a Seller
+                    Join Now
                   </Button>
                 </Col>
               </Row>

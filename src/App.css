@@ -25,15 +25,37 @@ body {
 }
 
 .nav > .active {
-  color: rgb(190, 177, 177);
+  color: #d57f3a;
 }
 .nav > a {
   text-decoration: none;
-  color: white;
+  color: brown;
 }
 
 .nav > a:hover {
-  color: rgb(190, 177, 177);
+  color: #d57f3a;
+}
+
+@import url("https://fonts.googleapis.com/css2?family=Caveat:wght@700&display=swap");
+.navbar_title {
+  font-size: 32px;
+  font-family: "Caveat", cursive;
+}
+
+.login_button {
+  background-color: #d57f3a;
+  font-size: x-large;
+  width: 150px;
+
+  border-radius: 50px;
+}
+
+.login_button:hover {
+  background-color: brown;
+}
+
+.login_button:focus {
+  background-color: brown;
 }
 
 /* Home background styling and handling breakpoint issue */
@@ -120,14 +142,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    padding-top: 50px;
-  }
-
-  .button-style-2 {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding-top: 8px;
+    padding-top: 30px;
   }
 }
 
@@ -142,14 +157,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    padding-top: 50px;
-  }
-
-  .button-style-2 {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding-top: 10px;
+    padding-top: 30px;
   }
 }
 
@@ -184,10 +192,10 @@ body {
   }
 }
 
-/* Login Form styling */
+/* Login & Registration Form styling */
 
 .login_form {
-  padding-top: 100px;
+  padding-top: 50px;
   padding-bottom: 30px;
   display: flex;
   justify-content: center;
@@ -214,10 +222,24 @@ body {
   background-color: brown;
 }
 
+.dropdown_button {
+  background-color: #d57f3a;
+  border-radius: 50px;
+}
+
+.dropdown_button:hover {
+  background-color: brown !important;
+}
+
+.dropdown_button:focus {
+  background-color: brown !important;
+}
+
 .login_form_text {
   display: flex;
   justify-content: center;
   align-items: center;
+  padding-bottom: 50px;
 }
 
 .form_card {
