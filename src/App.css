@@ -1,0 +1,232 @@
+/* Theme Color #D57F3A */
+
+/* To avoid overflow in small devices */
+@media only screen and (max-width: 768px) {
+  body {
+    overflow-x: hidden !important;
+  }
+  .container {
+    max-width: 100% !important;
+    overflow-x: hidden !important;
+  }
+}
+
+body {
+  margin: 0;
+  padding: 0;
+}
+
+/* Header styling  */
+
+.navLink {
+  margin-right: 30px;
+  font-weight: bold;
+  font-size: larger;
+}
+
+.nav > .active {
+  color: rgb(190, 177, 177);
+}
+.nav > a {
+  text-decoration: none;
+  color: white;
+}
+
+.nav > a:hover {
+  color: rgb(190, 177, 177);
+}
+
+/* Home background styling and handling breakpoint issue */
+
+.home {
+  background-color: #ffffff;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='800' viewBox='0 0 200 200'%3E%3Cdefs%3E%3ClinearGradient id='a' gradientUnits='userSpaceOnUse' x1='88' y1='88' x2='0' y2='0'%3E%3Cstop offset='0' stop-color='%23774720'/%3E%3Cstop offset='1' stop-color='%23be7134'/%3E%3C/linearGradient%3E%3ClinearGradient id='b' gradientUnits='userSpaceOnUse' x1='75' y1='76' x2='168' y2='160'%3E%3Cstop offset='0' stop-color='%238f8f8f'/%3E%3Cstop offset='0.09' stop-color='%23b3b3b3'/%3E%3Cstop offset='0.18' stop-color='%23c9c9c9'/%3E%3Cstop offset='0.31' stop-color='%23dbdbdb'/%3E%3Cstop offset='0.44' stop-color='%23e8e8e8'/%3E%3Cstop offset='0.59' stop-color='%23f2f2f2'/%3E%3Cstop offset='0.75' stop-color='%23fafafa'/%3E%3Cstop offset='1' stop-color='%23FFFFFF'/%3E%3C/linearGradient%3E%3Cfilter id='c' x='0' y='0' width='200%25' height='200%25'%3E%3CfeGaussianBlur in='SourceGraphic' stdDeviation='12' /%3E%3C/filter%3E%3C/defs%3E%3Cpolygon fill='url(%23a)' points='0 174 0 0 174 0'/%3E%3Cpath fill='%23000' fill-opacity='.5' filter='url(%23c)' d='M121.8 174C59.2 153.1 0 174 0 174s63.5-73.8 87-94c24.4-20.9 87-80 87-80S107.9 104.4 121.8 174z'/%3E%3Cpath fill='url(%23b)' d='M142.7 142.7C59.2 142.7 0 174 0 174s42-66.3 74.9-99.3S174 0 174 0S142.7 62.6 142.7 142.7z'/%3E%3C/svg%3E");
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  background-position: top left;
+}
+
+@media screen and (min-device-width: 992px) and (max-device-width: 1400px) {
+  .home {
+    height: 100vh;
+  }
+}
+
+/* Home page layout styling */
+
+.home-info {
+  padding: 60px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+@import url("https://fonts.googleapis.com/css2?family=Baloo+Chettan+2&display=swap");
+
+.home-info-para {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: auto;
+
+  word-spacing: 10px;
+  font-size: larger;
+  font-weight: bold;
+  font-family: "Baloo Chettan 2", cursive;
+}
+
+.title {
+  color: brown;
+  font-weight: bold;
+  font-size: x-large;
+}
+
+.register_button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 50px;
+}
+.signup_button {
+  background-color: #d57f3a;
+  font-size: x-large;
+  width: 260px;
+  word-spacing: 8px;
+  border-radius: 50px;
+  padding-left: 20px;
+  padding-right: 20px;
+  text-align: center;
+  border: #d57f3a;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.12), 0 2px 2px rgba(0, 0, 0, 0.12),
+    0 4px 4px rgba(0, 0, 0, 0.12), 0 8px 8px rgba(0, 0, 0, 0.12),
+    0 16px 16px rgba(0, 0, 0, 0.12);
+}
+
+@media screen and (min-device-width: 1200px) and (max-device-width: 1400px) {
+  .signup_button {
+    font-size: x-large;
+    width: 230px;
+    word-spacing: 5px;
+  }
+}
+
+@media screen and (min-device-width: 992px) and (max-device-width: 1199px) {
+  .signup_button {
+    font-size: x-large;
+    width: 300px;
+    word-spacing: 10px;
+  }
+
+  .button-style-2 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 50px;
+  }
+
+  .button-style-2 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 8px;
+  }
+}
+
+@media screen and (min-device-width: 0px) and (max-device-width: 665px) {
+  .signup_button {
+    font-size: x-large;
+    width: 300px;
+    word-spacing: 8px;
+  }
+
+  .button-style-2 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 50px;
+  }
+
+  .button-style-2 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 10px;
+  }
+}
+
+.signup_button:hover {
+  background-color: brown;
+}
+
+.signup_button:focus {
+  background-color: brown;
+}
+
+/* Footer styling */
+
+.footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 20px;
+}
+
+.footerLayout {
+  padding-top: 40px;
+}
+
+@media screen and (min-device-width: 992px) {
+  .footer {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+  }
+}
+
+/* Login Form styling */
+
+.login_form {
+  padding-top: 100px;
+  padding-bottom: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.login_form_submit {
+  padding: 20px;
+}
+
+.login_button {
+  font-size: large;
+  font-weight: bold;
+  word-spacing: 5px;
+  border-radius: 50px;
+  background-color: #d57f3a;
+}
+
+.login_button:hover {
+  background-color: brown;
+}
+
+.login_button:focus {
+  background-color: brown;
+}
+
+.login_form_text {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.form_card {
+  width: 22rem;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.12), 0 2px 2px rgba(0, 0, 0, 0.12),
+    0 4px 4px rgba(0, 0, 0, 0.12), 0 8px 8px rgba(0, 0, 0, 0.12),
+    0 16px 16px rgba(0, 0, 0, 0.12);
+}
+
+.write_labels {
+  font-size: x-large;
+}
