@@ -25,15 +25,15 @@ body {
 }
 
 .nav > .active {
-  color: #d57f3a;
+  color: brown;
 }
 .nav > a {
   text-decoration: none;
-  color: brown;
+  color: #d57f3a;
 }
 
 .nav > a:hover {
-  color: #d57f3a;
+  color: brown;
 }
 
 @import url("https://fonts.googleapis.com/css2?family=Caveat:wght@700&display=swap");
@@ -259,4 +259,53 @@ body {
 
 .write_labels {
   font-size: x-large;
+}
+
+/* Profile */
+
+.avatar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.profile_title {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.profile_card_layout {
+  padding-top: 80px;
+  padding-bottom: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.profile_card {
+  width: 80vw;
+  padding: 20px;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.12), 0 2px 2px rgba(0, 0, 0, 0.12),
+    0 4px 4px rgba(0, 0, 0, 0.12), 0 8px 8px rgba(0, 0, 0, 0.12),
+    0 16px 16px rgba(0, 0, 0, 0.12);
+}
+
+@media screen and (min-device-width: 576px) and (max-device-width: 767px) {
+  .profile_card {
+    width: 100vw;
+    padding: 10px;
+  }
+}
+
+@media screen and (min-device-width: 992px) {
+  .profile_card {
+    width: 60vw;
+  }
+}
+
+.profile_update_button {
+  display: flex;
+  flex-direction: row;
 }

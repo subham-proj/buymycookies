@@ -8,6 +8,7 @@ import Register from "./pages/register";
 import Dashboard from "./pages/dashboard";
 import SellerDashboard from "./pages/sellerDashboard";
 import Home from "./pages/home";
+import Profile from "./pages/profile";
 
 function App() {
   const { user } = useContext(Context);
@@ -51,6 +52,14 @@ function App() {
           )
         ) : (
           <Route exact path="/" component={Home} />
+        )}
+
+        {user ? (
+          <Route path={`/users/@/${user.username}`}>
+            {user ? <Profile /> : <Login />}
+          </Route>
+        ) : (
+          ""
         )}
 
         <Route path="/">

@@ -9,6 +9,7 @@ export default function Header() {
   const handleLogout = () => {
     dispatch({ type: "LOGOUT" });
     window.localStorage.clear();
+    window.location.replace("/");
   };
   return (
     <div>
@@ -21,22 +22,58 @@ export default function Header() {
             />
             <span className="navbar_title">Buy My Cookies</span>
           </Navbar.Brand>
+          <Navbar.Toggle aria-controls="basic-navbar-nav" />
+          <Navbar.Collapse id="basic-navbar-nav">
+            {user ? (
+              <Nav className="ms-auto nav">
+                <NavLink activeClassName="active" to="/" className="navLink">
+                  Home
+                </NavLink>
 
-          {user ? (
-            <Nav className="ms-auto nav">
-              <Link className="navLink">{`${user.username}`}</Link>
-              <NavLink
-                activeClassName="active"
-                to="/"
-                onClick={handleLogout}
-                className="navLink"
-              >
-                Logout
-              </NavLink>
-            </Nav>
-          ) : (
-            ""
-          )}
+                {user.account_type === "Both" ? (
+                  <NavLink
+                    activeClassName="active"
+                    to="/seller_dashboard"
+                    className="navLink"
+                  >
+                    Seller Dashboard
+                  </NavLink>
+                ) : (
+                  ""
+                )}
+
+                {user.account_type === "Seller Only" ? (
+                  ""
+                ) : (
+                  <NavLink
+                    activeClassName="active"
+                    to="/orders"
+                    className="navLink"
+                  >
+                    My Orders
+                  </NavLink>
+                )}
+
+                <NavLink
+                  activeClassName="active"
+                  to={`/users/@/${user.username}`}
+                  className="navLink"
+                >
+                  Profile
+                </NavLink>
+                <NavLink
+                  exact={true}
+                  to="/"
+                  onClick={handleLogout}
+                  className="navLink"
+                >
+                  Logout
+                </NavLink>
+              </Nav>
+            ) : (
+              ""
+            )}
+          </Navbar.Collapse>
         </Container>
       </Navbar>
     </div>
