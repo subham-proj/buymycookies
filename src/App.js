@@ -8,6 +8,7 @@ import Register from "./pages/register";
 import Dashboard from "./pages/dashboard";
 import SellerDashboard from "./pages/sellerDashboard";
 import Home from "./pages/home";
+import Error from "./pages/error/error";
 import Profile from "./pages/profile";
 
 function App() {
@@ -25,7 +26,7 @@ function App() {
             user.account_type === "Both" ? (
               <Dashboard />
             ) : (
-              "Wrong Gateway"
+              <Error />
             )
           ) : (
             <Login />
@@ -37,7 +38,7 @@ function App() {
             user.account_type === "Both" ? (
               <SellerDashboard />
             ) : (
-              "Wrong Gateway"
+              <Error />
             )
           ) : (
             <Login />

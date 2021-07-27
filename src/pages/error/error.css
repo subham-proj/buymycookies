@@ -1,0 +1,18 @@
+.error {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 30%;
+  left: 0;
+  right: 0;
+}
+
+.error_button_layout {
+  padding: 20px;
+}
+.error_button {
+  padding: 10px;
+  border-radius: 50px;
+}

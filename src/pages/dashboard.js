@@ -32,7 +32,7 @@ export default function Dashboard() {
             <div className="col-lg-8 m-15px-tb">
               <div className="row">
                 {posts.map((e) => (
-                  <div className="col-sm-6">
+                  <div className="col-sm-6" key={e._id}>
                     <Posts key={e._id} data={e} />
                   </div>
                 ))}
@@ -47,7 +47,7 @@ export default function Dashboard() {
                 <div className="widget-body">
                   <div className="latest-post-aside media">
                     {recent.map((e) => (
-                      <div className="lpa-left media-body">
+                      <div className="lpa-left media-body" key={e._id}>
                         <div className="lpa-title">
                           <h5 className="recent_post">
                             <Link to={`/posts/${e._id}`}>{e.title}</Link>
