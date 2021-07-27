@@ -204,6 +204,9 @@ body {
 
 .login_form_submit {
   padding: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .login_button {
@@ -225,6 +228,7 @@ body {
 .dropdown_button {
   background-color: #d57f3a;
   border-radius: 50px;
+  color: white;
 }
 
 .dropdown_button:hover {
@@ -233,6 +237,10 @@ body {
 
 .dropdown_button:focus {
   background-color: brown !important;
+}
+
+.dropdown_button option {
+  background-color: #d57f3a;
 }
 
 .login_form_text {
