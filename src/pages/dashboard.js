@@ -41,7 +41,7 @@ export default function Dashboard() {
           <div className="row align-items-start">
             <div className="col-lg-8 m-15px-tb">
               <div className="row">
-                {posts.map((e) => (
+                {posts.reverse().map((e) => (
                   <div className="col-sm-6" key={e._id}>
                     <Posts key={e._id} data={e} />
                   </div>
@@ -56,7 +56,7 @@ export default function Dashboard() {
                 </div>
                 <div className="widget-body">
                   <div className="latest-post-aside media">
-                    {recent.map((e) => (
+                    {recent.reverse().map((e) => (
                       <div className="lpa-left media-body" key={e._id}>
                         <div className="lpa-title">
                           <h5 className="recent_post">

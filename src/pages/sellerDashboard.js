@@ -1,194 +1,78 @@
-import axios from "axios";
-import React, { useContext, useState } from "react";
-import { Container, Card, Col, Row, Form, Button } from "react-bootstrap";
+import React, { useContext, useEffect, useState } from "react";
+import { Container, Card, Button } from "react-bootstrap";
 import { Context } from "../context/context";
+import { Link } from "react-router-dom";
+import axios from "axios";
 
 export default function SellerDashboard() {
-  const [title, setTitle] = useState("");
-  const [description, setDescription] = useState("");
-  const [msp, setMsp] = useState(0);
-  const [cookiesType, setCookiesType] = useState("");
-  const [Egg, setEgg] = useState(false);
-  const [bakedTime, setBakedTime] = useState("");
-  const [endDate, setEndDate] = useState("");
-  const { user } = useContext(Context);
+  const [allPosts, setAllPosts] = useState([]);
+  const { user, dispatch } = useContext(Context);
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-
-    const newPost = {
-      title: title,
-      description: description,
-      username: user.username,
-      city: user.city,
-      msp: msp,
-      current_bid: msp,
-      no_of_bids: 0,
-      cookies_type: cookiesType,
-      egg: Egg,
-      baked_time: bakedTime,
-      bidding_end_date: endDate,
-    };
-
-    try {
-      const res = await axios.post("/posts", newPost);
-      window.location.replace("/posts/" + res.data._id);
-    } catch (err) {
-      console.log(newPost);
+  useEffect(() => {
+    async function fetchData() {
+      const response = await axios.get("/posts");
+      setAllPosts(response.data);
     }
+    fetchData();
+  }, []);
+
+  let posts = [];
+
+  for (let i = 0; i < allPosts.length; i++) {
+    if (user.username === allPosts[i].username) {
+      posts.push(allPosts[i]);
+    }
+  }
+
+  const handleDelete = async (e) => {
+    try {
+      await axios.delete(`/posts/${e._id}`, {
+        data: { username: user.username },
+      });
+      window.location.replace("/");
+    } catch (err) {}
   };
 
   return (
     <div>
       <Container className="seller_dashboard_layout">
-        <Card className="seller_dashboard">
-          <Card.Title className="new_post">
-            Post a new Cookie in the Store
-          </Card.Title>
-          <Card.Body>
-            <Form onSubmit={handleSubmit}>
-              <Form.Group
-                as={Row}
-                className="mb-3"
-                controlId="formHorizontalEmail"
-              >
-                <Form.Label column sm={2}>
-                  Product Title
-                </Form.Label>
-                <Col sm={10} lg={6} md={6}>
-                  <Form.Control
-                    type="text"
-                    placeholder="Cookie"
-                    required
-                    onChange={(e) => setTitle(e.target.value)}
-                  />
-                </Col>
-              </Form.Group>
-              <Form.Group
-                as={Row}
-                className="mb-3"
-                controlId="formHorizontalEmail"
-              >
-                <Form.Label column sm={2}>
-                  Product Description
-                </Form.Label>
-                <Col sm={10} lg={6} md={6}>
-                  <Form.Control
-                    type="text"
-                    as="textarea"
-                    rows={3}
-                    placeholder="This is a very tasty cookie made up of chocolate"
-                    required
-                    onChange={(e) => setDescription(e.target.value)}
-                  />
-                </Col>
-              </Form.Group>
-              <Form.Group
-                as={Row}
-                className="mb-3"
-                controlId="formHorizontalEmail"
-              >
-                <Form.Label column sm={2}>
-                  Minimum Selling Price
-                </Form.Label>
-                <Col sm={10} lg={6} md={6}>
-                  <Form.Control
-                    type="number"
-                    placeholder="₹ 1000"
-                    required
-                    onChange={(e) => setMsp(e.target.value)}
-                  />
-                </Col>
-              </Form.Group>
-              <Form.Group
-                as={Row}
-                className="mb-3"
-                controlId="formHorizontalEmail"
-              >
-                <Form.Label column sm={2}>
-                  Type
-                </Form.Label>
-                <Col sm={10} lg={6} md={6}>
-                  <select
-                    required
-                    onChange={(e) => setCookiesType(e.target.value)}
-                  >
-                    <option value="">Select ...</option>
-                    <option value="Chocolate">Chocolate</option>
-                    <option value="Vanilla">Vanilla</option>
-                    <option value="Oatmeal">Oatmeal</option>
-                    <option value="Nutella">Nutella</option>
-                  </select>
-                </Col>
-              </Form.Group>
-              <Form.Group
-                as={Row}
-                className="mb-3"
-                controlId="formHorizontalEmail"
-              >
-                <Form.Label column sm={2}>
-                  Egg
-                </Form.Label>
-                <Col sm={10} lg={6} md={6}>
-                  <input
-                    type="radio"
-                    name="egg"
-                    value="Yes"
-                    onChange={(e) => setEgg(true)}
-                  />
-                  <label style={{ padding: "10px" }}>Yes</label>
+        {posts.reverse().map((e) => (
+          <div className="seller_dashboard">
+            <Card className="seller_card">
+              <div>
+                <img
+                  src="https://via.placeholder.com/200x200/FFB6C1/000000"
+                  title=""
+                  alt=""
+                />
+              </div>
+              <Card.Body>
+                <h4>{e.title}</h4>
+                <p>Posted On : {new Date(e.createdAt).toDateString()}</p>
 
-                  <input
-                    type="radio"
-                    name="egg"
-                    value="No"
-                    onChange={(e) => setEgg(false)}
-                  />
-                  <label style={{ padding: "10px" }}>No</label>
-                </Col>
-              </Form.Group>
-              <Form.Group
-                as={Row}
-                className="mb-3"
-                controlId="formHorizontalEmail"
-              >
-                <Form.Label column sm={2}>
-                  Baked time <br></br>(less than a)
-                </Form.Label>
-                <Col sm={10} lg={6} md={6}>
-                  <select
-                    required
-                    onChange={(e) => setBakedTime(e.target.value)}
-                  >
-                    <option value="">Select ...</option>
-                    <option value="a day ago">a day ago</option>
-                    <option value="a week ago">a week ago</option>
-                    <option value="a month ago">a month ago</option>
-                  </select>
-                </Col>
-              </Form.Group>
-              <Form.Group
-                as={Row}
-                className="mb-3"
-                controlId="formHorizontalEmail"
-              >
-                <Form.Label column sm={2}>
-                  Bidding end date
-                </Form.Label>
-                <Col sm={10} lg={6} md={6}>
-                  <Form.Control
-                    type="date"
-                    required
-                    onChange={(e) => setEndDate(e.target.value)}
-                  />
-                </Col>
-              </Form.Group>
-              <Button type="submit" variant="success" size="lg">
-                Post
-              </Button>{" "}
-            </Form>
-          </Card.Body>
-        </Card>
+                <span className="seller_dashboard_bid">
+                  <h6>
+                    Current highest bid :{" "}
+                    <span className="seller_bid">₹ {e.current_bid}</span>
+                  </h6>
+                </span>
+
+                <span className="seller_dashboard_card_buttons">
+                  <span style={{ paddingRight: "20px" }}>
+                    <Button as={Link} to={`/posts/${e._id}`} variant="warning">
+                      Edit
+                    </Button>
+                  </span>
+                  <span>
+                    <Button variant="danger" onClick={() => handleDelete(e)}>
+                      Delete
+                    </Button>
+                  </span>
+                </span>
+              </Card.Body>
+            </Card>
+          </div>
+        ))}
       </Container>
     </div>
   );

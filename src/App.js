@@ -6,13 +6,14 @@ import Header from "./components/header";
 import Login from "./pages/login";
 import Register from "./pages/register";
 import Dashboard from "./pages/dashboard";
-import SellerDashboard from "./pages/sellerDashboard";
+import AddProduct from "./pages/addProduct";
 import Home from "./pages/home";
 import Error from "./pages/error/error";
 import Profile from "./pages/profile";
 import ManageOrders from "./pages/manageOrders";
 import Orders from "./pages/orders";
 import SinglePost from "./pages/singlePosts/singlePost";
+import SellerDashboard from "./pages/sellerDashboard";
 
 function App() {
   const { user } = useContext(Context);
@@ -36,11 +37,24 @@ function App() {
             <Login />
           )}
         </Route>
-        <Route exact path="/seller_dashboard">
+
+        <Route path="/seller_dashboard">
+          {user ? (
+            user.account_type === "Seller Only" ? (
+              <SellerDashboard />
+            ) : (
+              <Error />
+            )
+          ) : (
+            <Login />
+          )}
+        </Route>
+
+        <Route exact path="/add_product">
           {user ? (
             user.account_type === "Seller Only" ||
             user.account_type === "Both" ? (
-              <SellerDashboard />
+              <AddProduct />
             ) : (
               <Error />
             )
@@ -53,7 +67,7 @@ function App() {
           user.account_type === "Buyer Only" || user.account_type === "Both" ? (
             <Route path="/dashboard" component={Dashboard} />
           ) : (
-            <Route path="/seller_dashboard" component={SellerDashboard} />
+            <Route path="/add_product" component={AddProduct} />
           )
         ) : (
           <Route exact path="/" component={Home} />

@@ -35,13 +35,14 @@ export default function Header() {
                   Home
                 </NavLink>
 
-                {user.account_type === "Both" ? (
+                {user.account_type === "Both" ||
+                user.account_type === "Seller Only" ? (
                   <NavLink
                     activeClassName="active"
-                    to="/seller_dashboard"
+                    to="/add_product"
                     className="navLink"
                   >
-                    Seller Dashboard
+                    Add Product
                   </NavLink>
                 ) : (
                   ""
