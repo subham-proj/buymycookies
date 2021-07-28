@@ -5,6 +5,7 @@ import { Context } from "../context/context";
 import axios from "axios";
 
 export default function Profile() {
+  // states to for assigning profile data
   const [fullName, setfullName] = useState("");
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
@@ -13,9 +14,12 @@ export default function Profile() {
   const [nameOfBusiness, setNameOfBusiness] = useState("");
   const [GSTN, setGSTN] = useState("");
 
+  // Session's user
   const { user, dispatch } = useContext(Context);
+  // to update when edit button is clicked
   const [updateMode, setUpdateMode] = useState(false);
 
+  // handling  profile update
   const handleUpdate = async () => {
     dispatch({ type: "UPDATE_START" });
 
@@ -39,6 +43,7 @@ export default function Profile() {
       dispatch({ type: "UPDATE_FAILED" });
     }
   };
+
   return (
     <div>
       <Container>

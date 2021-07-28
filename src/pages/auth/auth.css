@@ -1,0 +1,66 @@
+.login_form {
+  padding-top: 50px;
+  padding-bottom: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.login_form_submit {
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.login_button {
+  font-size: large;
+  font-weight: bold;
+  word-spacing: 5px;
+  border-radius: 50px;
+  background-color: #d57f3a;
+}
+
+.login_button:hover {
+  background-color: brown;
+}
+
+.login_button:focus {
+  background-color: brown;
+}
+
+.dropdown_button {
+  background-color: #d57f3a;
+  border-radius: 50px;
+  color: white;
+}
+
+.dropdown_button:hover {
+  background-color: brown !important;
+}
+
+.dropdown_button:focus {
+  background-color: brown !important;
+}
+
+.dropdown_button option {
+  background-color: #d57f3a;
+}
+
+.login_form_text {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-bottom: 50px;
+}
+
+.form_card {
+  width: 22rem;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.12), 0 2px 2px rgba(0, 0, 0, 0.12),
+    0 4px 4px rgba(0, 0, 0, 0.12), 0 8px 8px rgba(0, 0, 0, 0.12),
+    0 16px 16px rgba(0, 0, 0, 0.12);
+}
+
+.write_labels {
+  font-size: x-large;
+}

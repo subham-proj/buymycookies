@@ -1,19 +1,29 @@
 import React, { useContext } from "react";
 import { Switch, Route } from "react-router-dom";
+
+// Context API for session authentication
 import { Context } from "./context/context";
 
+// All the Components/pages
 import Header from "./components/header";
-import Login from "./pages/login";
-import Register from "./pages/register";
-import Dashboard from "./pages/dashboard";
-import AddProduct from "./pages/addProduct";
-import Home from "./pages/home";
-import Error from "./pages/error/error";
-import Profile from "./pages/profile";
-import ManageOrders from "./pages/manageOrders";
-import Orders from "./pages/orders";
+
+import Login from "./pages/auth/login";
+import Register from "./pages/auth/register";
+
 import SinglePost from "./pages/singlePosts/singlePost";
-import SellerDashboard from "./pages/sellerDashboard";
+
+import Profile from "./pages/profile";
+
+import Dashboard from "./pages/dashboards/dashboard";
+import SellerDashboard from "./pages/dashboards/sellerDashboard";
+
+import ManageOrders from "./pages/orders/manageOrders";
+import Orders from "./pages/orders/myorders";
+
+import AddProduct from "./pages/addProduct";
+
+import Error from "./pages/error/error";
+import Home from "./pages/home";
 
 function App() {
   const { user } = useContext(Context);
@@ -25,6 +35,11 @@ function App() {
         <Route path="/posts" component={SinglePost} />
         <Route exact path="/register" component={Register} />
         <Route exact path="/login" component={Login} />
+
+        {/** Conditional Routing for session's user authentication */}
+
+        {/** Show Dashboard to place a bid to users having either "Buyer only" or "Both" authorization */}
+
         <Route exact path="/dashboard">
           {user ? (
             user.account_type === "Buyer Only" ||
@@ -38,6 +53,8 @@ function App() {
           )}
         </Route>
 
+        {/** Show Seller Dashboard to users having "Seller only" authorization */}
+
         <Route path="/seller_dashboard">
           {user ? (
             user.account_type === "Seller Only" ? (
@@ -49,6 +66,8 @@ function App() {
             <Login />
           )}
         </Route>
+
+        {/** User having "Seller Only" or "Both" authorization will be able to add product for sale */}
 
         <Route exact path="/add_product">
           {user ? (
@@ -63,15 +82,8 @@ function App() {
           )}
         </Route>
 
-        {user ? (
-          user.account_type === "Buyer Only" || user.account_type === "Both" ? (
-            <Route path="/dashboard" component={Dashboard} />
-          ) : (
-            <Route path="/add_product" component={AddProduct} />
-          )
-        ) : (
-          <Route exact path="/" component={Home} />
-        )}
+        {/** if the session has logged in user, he/she can navigate 
+        to his/her profile otherwise will be directed to login page */}
 
         {user ? (
           <Route path={`/users/@/${user.username}`}>
@@ -80,6 +92,9 @@ function App() {
         ) : (
           ""
         )}
+
+        {/** Since Seller cannot make an order so, My Order page will be visible 
+        to users having "Buyer only" or "Both" authorization */}
 
         <Route exact path="/orders">
           {user ? (
@@ -94,6 +109,8 @@ function App() {
           )}
         </Route>
 
+        {/** Users who can add product can Manage the orders also */}
+
         <Route exact path="/manage_orders">
           {user ? (
             user.account_type === "Seller Only" ||
@@ -106,6 +123,9 @@ function App() {
             <Login />
           )}
         </Route>
+
+        {/** The base path will be Dashboard or Seller Dashboard if session has a 
+        logged in user otherwise it will be directed to the landing page*/}
 
         <Route path="/">
           {user ? (

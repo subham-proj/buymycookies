@@ -1,13 +1,18 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Container, Card, Button } from "react-bootstrap";
-import { Context } from "../context/context";
+import { Context } from "../../context/context";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import "./dashboards.css";
 
 export default function SellerDashboard() {
+  // To assign all the posts in the database
   const [allPosts, setAllPosts] = useState([]);
-  const { user, dispatch } = useContext(Context);
 
+  // Session's user details
+  const { user } = useContext(Context);
+
+  // function to fetch all the posts and assign them to allPosts
   useEffect(() => {
     async function fetchData() {
       const response = await axios.get("/posts");
@@ -16,6 +21,7 @@ export default function SellerDashboard() {
     fetchData();
   }, []);
 
+  // Putting all the posts which belongs to session's user
   let posts = [];
 
   for (let i = 0; i < allPosts.length; i++) {
@@ -24,6 +30,7 @@ export default function SellerDashboard() {
     }
   }
 
+  // function to delete post
   const handleDelete = async (e) => {
     try {
       await axios.delete(`/posts/${e._id}`, {
@@ -36,6 +43,7 @@ export default function SellerDashboard() {
   return (
     <div>
       <Container className="seller_dashboard_layout">
+        {/** looping in reverse order to get latest posts first */}
         {posts.reverse().map((e) => (
           <div className="seller_dashboard">
             <Card className="seller_card">
@@ -43,7 +51,7 @@ export default function SellerDashboard() {
                 <img
                   src="https://via.placeholder.com/200x200/FFB6C1/000000"
                   title=""
-                  alt=""
+                  alt="placeholder"
                 />
               </div>
               <Card.Body>

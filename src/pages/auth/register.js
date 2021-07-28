@@ -2,8 +2,10 @@ import React, { useState } from "react";
 import { Card, Container, Form, Button, Alert } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import "./auth.css";
 
 export default function Register() {
+  // defining states for assingment according to Registration Form input
   const [drop, setDrop] = useState("");
   const [fullName, setfullName] = useState("");
   const [username, setUsername] = useState("");
@@ -14,13 +16,21 @@ export default function Register() {
   const [nameOfBusiness, setNameOfBusiness] = useState("");
   const [GSTN, setGSTN] = useState("");
   const [password, setPassword] = useState("");
+
+  // A step before registering user, to check whether password matches or not
   const [confirmPassword, setConfirmPassword] = useState("");
+
+  // to update if password and confirm password mismatch
   const [isNotValid, setIsNotValid] = useState(false);
+
+  // To update if a user already exist by given username/contact in the Database
   const [userExist, setUserExist] = useState(false);
 
+  // function to handle submitted data from client side
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    // Checking if any user already exists in the database with same username/contact number or not
     const user = await axios.get("/users");
 
     for (var x in user.data) {
@@ -34,12 +44,14 @@ export default function Register() {
         break;
       }
     }
-    console.log(user);
+    // console.log(user);
 
     if (userExist === false) {
       if (password !== confirmPassword) {
         setIsNotValid(true);
       } else {
+        /* if the user doesnot exists already in the database then the new user's data is
+          ready to be registered */
         try {
           const res = await axios.post("/auth/register", {
             full_name: fullName,
@@ -96,6 +108,7 @@ export default function Register() {
                   onChange={(e) => setfullName(e.target.value)}
                 />
               </Form.Group>
+
               <Form.Group className="mb-3" controlId="formBasicEmail">
                 <Form.Label>Username *</Form.Label>
                 <Form.Control
@@ -111,6 +124,7 @@ export default function Register() {
                   </Form.Text>
                 </Form.Text>
               </Form.Group>
+
               <Form.Group className="mb-3" controlId="formBasicEmail">
                 <Form.Label>Contact Number *</Form.Label>
                 <Form.Control
@@ -121,6 +135,7 @@ export default function Register() {
                   onChange={(e) => setContact(e.target.value)}
                 />
               </Form.Group>
+
               <Form.Group className="mb-3" controlId="formBasicEmail">
                 <Form.Label>Email address</Form.Label>
                 <Form.Control
@@ -130,6 +145,7 @@ export default function Register() {
                   onChange={(e) => setEmail(e.target.value)}
                 />
               </Form.Group>
+
               <Form.Group className="mb-3" controlId="formBasicPassword">
                 <Form.Label>Password *</Form.Label>
                 <Form.Control
@@ -139,6 +155,7 @@ export default function Register() {
                   onChange={(e) => setPassword(e.target.value)}
                 />
               </Form.Group>
+
               <Form.Group className="mb-3" controlId="formBasicPassword">
                 <Form.Label>Re-enter Password *</Form.Label>
                 <Form.Control
@@ -148,11 +165,13 @@ export default function Register() {
                   onChange={(e) => setConfirmPassword(e.target.value)}
                 />
               </Form.Group>
+
               {isNotValid ? (
                 <Alert variant="danger">Password does not match</Alert>
               ) : (
                 ""
               )}
+
               <Form.Group className="mb-3" controlId="formBasicPassword">
                 <Form.Label>City *</Form.Label>
                 <Form.Control
@@ -162,6 +181,7 @@ export default function Register() {
                   onChange={(e) => setCity(e.target.value)}
                 />
               </Form.Group>
+
               {drop === "Seller Only" || drop === "Both" ? (
                 <Form.Group className="mb-3" controlId="formBasicPassword">
                   <Form.Label>Name of Business</Form.Label>
@@ -197,6 +217,7 @@ export default function Register() {
           </Card.Body>
         </Card>
       </Container>
+
       <h6 className="login_form_text">
         Already have an account ?{" "}
         <Link to="/login" style={{ textDecoration: "none", color: "#d57f3a" }}>

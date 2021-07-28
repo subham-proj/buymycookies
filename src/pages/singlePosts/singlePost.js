@@ -17,13 +17,23 @@ import {
 import "./singlePost.css";
 
 export default function SinglePost() {
+  // using useLocation to extract the path and then the id of the post
   const location = useLocation();
   const path = location.pathname.split("/")[2];
+
+  // to set the state with the current post data
   const [post, setPost] = useState({});
+
+  // Session's user details
   const { user } = useContext(Context);
+
+  // to update if edit button is clicked
   const [updateMode, setUpdateMode] = useState(false);
+
+  // to set current post's user details for displaying relevant data
   const [userDetails, setUserDetails] = useState([]);
 
+  // function to fetch user details and post details simultaneously
   useEffect(() => {
     async function fetchData() {
       const res = await axios.get("/posts/" + path);
@@ -34,17 +44,21 @@ export default function SinglePost() {
     fetchData();
   }, [path]);
 
+  // just to make less clumsy jsx down below I have mentioned this here
   let toUpdate = false;
-
   if (user && post.username === user.username) {
     toUpdate = true;
   }
+
   // console.log(updateMode);
+
+  // if user wants to edit the post, these are the available fields and corresponding states
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [msp, setMsp] = useState("");
   const [endDate, setEndDate] = useState("");
 
+  // to delete post
   const handleDelete = async () => {
     try {
       await axios.delete(`/posts/${path}`, {
@@ -54,6 +68,7 @@ export default function SinglePost() {
     } catch (err) {}
   };
 
+  // to save updated post
   const handleUpdate = async () => {
     try {
       await axios.put(`/posts/${path}`, {
@@ -67,21 +82,29 @@ export default function SinglePost() {
     } catch (err) {}
   };
 
+  // when public comes and makes a bid this states will be used
   const [newBid, setNewBid] = useState(post.current_bid);
   const [alertError, setAlertError] = useState(false);
 
+  // for handling Modal
   const [show, setShow] = useState(false);
+
+  // if this function will be called, then it will reset states for bidding
   const clearState = () => {
     setNewBid({ ...post.current_bid });
     setAlertError(false);
   };
+
+  // For closing and clearing modal
   const handleClose = () => {
     setShow(false);
 
     clearState();
   };
+  // to opening modal
   const handleShow = () => setShow(true);
 
+  // handling and making a new bid
   const handleNewBid = async () => {
     if (newBid > post.current_bid) {
       try {
@@ -111,6 +134,7 @@ export default function SinglePost() {
                   </div>
                 </div>
               </div>
+
               <div className="details col-md-6">
                 {updateMode ? (
                   <Form.Control
@@ -121,6 +145,7 @@ export default function SinglePost() {
                 ) : (
                   <h3 className="product-title">{post.title}</h3>
                 )}
+
                 <div className="rating">
                   {post.egg ? (
                     <span className="color-2 red"></span>
@@ -136,6 +161,7 @@ export default function SinglePost() {
                     )}
                   </span>
                 </div>
+
                 {updateMode ? (
                   <Col sm={10} lg={12} md={12}>
                     <Form.Control
@@ -193,9 +219,11 @@ export default function SinglePost() {
                 <h5 className="price">
                   Current Highest Bid: <span>&nbsp; ₹ {post.current_bid}</span>
                 </h5>
+
                 <p className="vote">
                   <strong>{post.no_of_bids}</strong> bids till now!{" "}
                 </p>
+
                 <p className="vote">
                   <b>Posted By : </b>{" "}
                   {userDetails.name_of_business
@@ -205,12 +233,15 @@ export default function SinglePost() {
                       userDetails.username +
                       ")"}{" "}
                 </p>
+
                 <p className="vote">
                   <b>Posted On : </b> {new Date(post.createdAt).toDateString()}{" "}
                 </p>
+
                 <p className="vote">
                   <b>Location : </b> {post.city}{" "}
                 </p>
+
                 <div className="action">
                   {toUpdate ? (
                     updateMode ? (
@@ -282,7 +313,6 @@ export default function SinglePost() {
                             <Col sm={10} lg={6} md={6}>
                               <Form.Control
                                 type="number"
-                                min="`${post.current_bid}`"
                                 placeholder={post.current_bid}
                                 onChange={(e) => setNewBid(e.target.value)}
                               />

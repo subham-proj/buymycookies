@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import Posts from "./Posts/posts.js";
+import Posts from "../Posts/posts.js";
 import axios from "axios";
 import moment from "moment";
 
 export default function Dashboard() {
+  // state to assign all the posts in the database
   const [allPosts, setAllPosts] = useState([]);
 
   useEffect(() => {
@@ -15,6 +16,7 @@ export default function Dashboard() {
     fetchData();
   }, []);
 
+  // Now, assigning only those posts which has bidding end date greater than current date
   let posts = [];
   let today = new Date();
   for (let i = 0; i < allPosts.length; i++) {
@@ -23,9 +25,8 @@ export default function Dashboard() {
     }
   }
 
-  // Setting recent posts
+  // Setting 5 recent posts for sidebar
   let recent = [];
-
   for (let i = 0; i < posts.length; i++) {
     if (recent.length < 5) {
       recent.push(posts[i]);
@@ -41,6 +42,7 @@ export default function Dashboard() {
           <div className="row align-items-start">
             <div className="col-lg-8 m-15px-tb">
               <div className="row">
+                {/** looping in reverse order to get latest posts first */}
                 {posts.reverse().map((e) => (
                   <div className="col-sm-6" key={e._id}>
                     <Posts key={e._id} data={e} />
@@ -56,6 +58,7 @@ export default function Dashboard() {
                 </div>
                 <div className="widget-body">
                   <div className="latest-post-aside media">
+                    {/** looping in reverse order to get latest posts first */}
                     {recent.reverse().map((e) => (
                       <div className="lpa-left media-body" key={e._id}>
                         <div className="lpa-title">

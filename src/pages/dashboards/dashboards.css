@@ -1,0 +1,52 @@
+.seller_dashboard_layout {
+  display: flex;
+  flex-direction: column;
+  padding-top: 50px;
+  padding-bottom: 30px;
+}
+
+.seller_dashboard {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-bottom: 30px;
+}
+
+.seller_card {
+  width: 60%;
+  padding: 10px;
+  display: flex;
+  flex-direction: row;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.12), 0 2px 2px rgba(0, 0, 0, 0.12),
+    0 4px 4px rgba(0, 0, 0, 0.12), 0 8px 8px rgba(0, 0, 0, 0.12),
+    0 16px 16px rgba(0, 0, 0, 0.12);
+}
+
+@media screen and (max-device-width: 991px) {
+  .seller_card {
+    width: 100%;
+  }
+}
+
+.seller_dashboard_bid {
+  position: relative;
+  bottom: 0;
+  padding-bottom: 20px;
+}
+
+.seller_dashboard_bid h6 {
+  font-weight: bold;
+}
+
+.seller_bid {
+  color: #d57f3a;
+  font-size: larger;
+}
+
+.seller_dashboard_card_buttons {
+  display: flex;
+  flex-direction: row;
+  position: absolute;
+  bottom: 0;
+  padding-bottom: 20px;
+}

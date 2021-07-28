@@ -4,6 +4,7 @@ import { Container, Card, Col, Row, Form, Button } from "react-bootstrap";
 import { Context } from "../context/context";
 
 export default function SellerDashboard() {
+  // all the neccessary states that will be needed to post a new product in the database
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [msp, setMsp] = useState(0);
@@ -11,8 +12,11 @@ export default function SellerDashboard() {
   const [Egg, setEgg] = useState(false);
   const [bakedTime, setBakedTime] = useState("");
   const [endDate, setEndDate] = useState("");
+
+  // Session's user details
   const { user } = useContext(Context);
 
+  // function to validate and Post the form data
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -45,6 +49,7 @@ export default function SellerDashboard() {
           <Card.Title className="new_post">
             Post a new Cookie in the Store
           </Card.Title>
+
           <Card.Body>
             <Form onSubmit={handleSubmit}>
               <Form.Group

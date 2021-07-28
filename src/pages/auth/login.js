@@ -2,10 +2,13 @@ import React, { useRef, useContext } from "react";
 import { Card, Container, Form, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
-import { Context } from "../context/context";
+import { Context } from "../../context/context";
 import axios from "axios";
 
+import "./auth.css";
+
 export default function Login() {
+  // assign username and password using useRef Hook (could have used useState hook also)
   const usernameRef = useRef();
   const passwordRef = useRef();
 
@@ -22,6 +25,8 @@ export default function Login() {
       });
 
       dispatch({ type: "LOGIN_SUCCESS", payload: res.data });
+
+      // Handling case : Where to redirect after successful login attempt depending on user's authorization
       if (
         res.data.account_type === "Buyer Only" ||
         res.data.account_type === "Both"
@@ -31,9 +36,11 @@ export default function Login() {
         window.location.replace("/seller_dashboard");
       }
     } catch (err) {
+      // alerting for invalid login attempt
       alert("Invalid Credentials!!");
       dispatch({ type: "LOGIN_FAILED" });
 
+      // reseting values for next attempt
       usernameRef.current.value = "";
       passwordRef.current.value = "";
     }
@@ -48,6 +55,7 @@ export default function Login() {
               <h6 style={{ textAlign: "center", padding: "20px" }}>
                 Enter your credentials here
               </h6>
+
               <Form.Group className="mb-3" controlId="formBasicEmail">
                 <Form.Label>Username *</Form.Label>
                 <Form.Control
@@ -77,11 +85,13 @@ export default function Login() {
           </Card.Body>
         </Card>
       </Container>
+
       <h6 className="login_form_text">
         <Link to="/login" style={{ textDecoration: "none", color: "#d57f3a" }}>
           Forgot Password
         </Link>{" "}
       </h6>
+
       <h6 className="login_form_text">
         Don't have an account?{" "}
         <Link
