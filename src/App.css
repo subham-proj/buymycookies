@@ -276,15 +276,25 @@ body {
   align-items: center;
 }
 
-.profile_card_layout {
+.profile_card_layout,
+.seller_dashboard_layout {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 50px;
+  padding-bottom: 30px;
+}
+
+.profile_card,
+.seller_dashboard {
   padding-top: 80px;
   padding-bottom: 50px;
   display: flex;
   justify-content: center;
-  align-items: center;
 }
 
-.profile_card {
+.profile_card,
+.seller_dashboard {
   width: 80vw;
   padding: 20px;
   box-shadow: 0 1px 1px rgba(0, 0, 0, 0.12), 0 2px 2px rgba(0, 0, 0, 0.12),
@@ -293,14 +303,16 @@ body {
 }
 
 @media screen and (min-device-width: 576px) and (max-device-width: 767px) {
-  .profile_card {
-    width: 100vw;
+  .profile_card,
+  .seller_dashboard {
+    width: 90vw;
     padding: 10px;
   }
 }
 
 @media screen and (min-device-width: 992px) {
-  .profile_card {
+  .profile_card,
+  .seller_dashboard {
     width: 60vw;
   }
 }
@@ -308,4 +320,11 @@ body {
 .profile_update_button {
   display: flex;
   flex-direction: row;
+}
+
+.new_post {
+  text-align: center;
+  padding: 30px;
+  font-weight: bold;
+  font-size: x-large;
 }

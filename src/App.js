@@ -10,6 +10,7 @@ import SellerDashboard from "./pages/sellerDashboard";
 import Home from "./pages/home";
 import Error from "./pages/error/error";
 import Profile from "./pages/profile";
+import SinglePost from "./pages/singlePosts/singlePost";
 
 function App() {
   const { user } = useContext(Context);
@@ -18,6 +19,7 @@ function App() {
     <div>
       <Header />
       <Switch>
+        <Route path="/posts" component={SinglePost} />
         <Route exact path="/register" component={Register} />
         <Route exact path="/login" component={Login} />
         <Route exact path="/dashboard">

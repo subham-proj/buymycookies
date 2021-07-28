@@ -26,7 +26,12 @@ export default function Header() {
           <Navbar.Collapse id="basic-navbar-nav">
             {user ? (
               <Nav className="ms-auto nav">
-                <NavLink activeClassName="active" to="/" className="navLink">
+                <NavLink
+                  activeClassName="active"
+                  exact={true}
+                  to="/"
+                  className="navLink"
+                >
                   Home
                 </NavLink>
 
@@ -43,8 +48,14 @@ export default function Header() {
                 )}
 
                 {user.account_type === "Seller Only" ? (
-                  ""
-                ) : (
+                  <NavLink
+                    activeClassName="active"
+                    to="/manage_orders"
+                    className="navLink"
+                  >
+                    Manage Orders
+                  </NavLink>
+                ) : user.account_type === "Buyer Only" ? (
                   <NavLink
                     activeClassName="active"
                     to="/orders"
@@ -52,6 +63,25 @@ export default function Header() {
                   >
                     My Orders
                   </NavLink>
+                ) : user.account_type === "Both" ? (
+                  [
+                    <NavLink
+                      activeClassName="active"
+                      to="/orders"
+                      className="navLink"
+                    >
+                      My Orders
+                    </NavLink>,
+                    <NavLink
+                      activeClassName="active"
+                      to="/manage_orders"
+                      className="navLink"
+                    >
+                      Manage Orders
+                    </NavLink>,
+                  ]
+                ) : (
+                  ""
                 )}
 
                 <NavLink
