@@ -4,7 +4,16 @@ import { useLocation } from "react-router-dom";
 
 import { Context } from "../../context/context";
 
-import { Container, Form, Button, Col, Card } from "react-bootstrap";
+import {
+  Container,
+  Form,
+  Button,
+  Col,
+  Row,
+  Card,
+  Modal,
+  Alert,
+} from "react-bootstrap";
 import "./singlePost.css";
 
 export default function SinglePost() {
@@ -58,6 +67,34 @@ export default function SinglePost() {
     } catch (err) {}
   };
 
+  const [newBid, setNewBid] = useState(post.current_bid);
+  const [alertError, setAlertError] = useState(false);
+
+  const [show, setShow] = useState(false);
+  const clearState = () => {
+    setNewBid({ ...post.current_bid });
+    setAlertError(false);
+  };
+  const handleClose = () => {
+    setShow(false);
+
+    clearState();
+  };
+  const handleShow = () => setShow(true);
+
+  const handleNewBid = async () => {
+    if (newBid > post.current_bid) {
+      try {
+        await axios.put(`/posts/newBid/${path}`, {
+          current_bid: newBid,
+        });
+        window.location.reload();
+      } catch (err) {}
+    } else {
+      setAlertError(true);
+    }
+  };
+
   return (
     <div>
       <Container>
@@ -67,7 +104,10 @@ export default function SinglePost() {
               <div className="preview col-md-6">
                 <div className="preview-pic tab-content">
                   <div className="tab-pane active" id="pic-1">
-                    <img src="https://via.placeholder.com/300/09f/fff.pngC/O https://placeholder.com/" />
+                    <img
+                      src="https://via.placeholder.com/300/09f/fff.pngC/O https://placeholder.com/"
+                      alt="product_image"
+                    />
                   </div>
                 </div>
               </div>
@@ -151,10 +191,10 @@ export default function SinglePost() {
                 </h5>
 
                 <h5 className="price">
-                  Current Highest Bid: <span>&nbsp; ₹ {post.msp}</span>
+                  Current Highest Bid: <span>&nbsp; ₹ {post.current_bid}</span>
                 </h5>
                 <p className="vote">
-                  <strong>0</strong> bids till now!{" "}
+                  <strong>{post.no_of_bids}</strong> bids till now!{" "}
                 </p>
                 <p className="vote">
                   <b>Posted By : </b>{" "}
@@ -207,7 +247,72 @@ export default function SinglePost() {
                       </div>
                     )
                   ) : (
-                    ""
+                    <div>
+                      <span style={{ paddingLeft: "20px" }}>
+                        <Button className="bid_now btn" onClick={handleShow}>
+                          Make a bid
+                        </Button>
+                      </span>
+
+                      <Modal
+                        size="lg"
+                        aria-labelledby="contained-modal-title-vcenter"
+                        centered
+                        show={show}
+                        onHide={handleClose}
+                      >
+                        <Modal.Header>
+                          <Modal.Title style={{ fontWeight: "bold" }}>
+                            Make a bid now
+                          </Modal.Title>
+                        </Modal.Header>
+                        <Modal.Body>
+                          <h4 style={{ paddingBottom: "20px", color: "red" }}>
+                            Current Highest Bid :{" "}
+                            <span className="bt">₹ {post.current_bid}</span>
+                          </h4>
+                          <Form.Group
+                            as={Row}
+                            className="mb-3"
+                            controlId="formHorizontalEmail"
+                          >
+                            <Form.Label column sm={2}>
+                              Your Bid
+                            </Form.Label>
+                            <Col sm={10} lg={6} md={6}>
+                              <Form.Control
+                                type="number"
+                                min="`${post.current_bid}`"
+                                placeholder={post.current_bid}
+                                onChange={(e) => setNewBid(e.target.value)}
+                              />
+                            </Col>
+                          </Form.Group>
+                          {alertError ? (
+                            <div>
+                              <Alert variant="danger">Make a valid bid</Alert>
+                              <p
+                                className="text-muted"
+                                style={{ textAlign: "center " }}
+                              >
+                                (Note : Make a bid more than the current bid
+                                otherwise it will be an invalid bid)
+                              </p>
+                            </div>
+                          ) : (
+                            ""
+                          )}
+                        </Modal.Body>
+                        <Modal.Footer>
+                          <Button onClick={handleNewBid} variant="success">
+                            Place the Bid
+                          </Button>
+                          <Button onClick={handleClose} variant="danger">
+                            Cancel
+                          </Button>
+                        </Modal.Footer>
+                      </Modal>
+                    </div>
                   )}
                 </div>
               </div>

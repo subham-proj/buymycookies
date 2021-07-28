@@ -10,6 +10,8 @@ import SellerDashboard from "./pages/sellerDashboard";
 import Home from "./pages/home";
 import Error from "./pages/error/error";
 import Profile from "./pages/profile";
+import ManageOrders from "./pages/manageOrders";
+import Orders from "./pages/orders";
 import SinglePost from "./pages/singlePosts/singlePost";
 
 function App() {
@@ -64,6 +66,32 @@ function App() {
         ) : (
           ""
         )}
+
+        <Route exact path="/orders">
+          {user ? (
+            user.account_type === "Buyer Only" ||
+            user.account_type === "Both" ? (
+              <Orders />
+            ) : (
+              <Error />
+            )
+          ) : (
+            <Login />
+          )}
+        </Route>
+
+        <Route exact path="/manage_orders">
+          {user ? (
+            user.account_type === "Seller Only" ||
+            user.account_type === "Both" ? (
+              <ManageOrders />
+            ) : (
+              <Error />
+            )
+          ) : (
+            <Login />
+          )}
+        </Route>
 
         <Route path="/">
           {user ? (

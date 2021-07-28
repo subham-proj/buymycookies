@@ -22,6 +22,8 @@ export default function SellerDashboard() {
       username: user.username,
       city: user.city,
       msp: msp,
+      current_bid: msp,
+      no_of_bids: 0,
       cookies_type: cookiesType,
       egg: Egg,
       baked_time: bakedTime,
@@ -111,6 +113,7 @@ export default function SellerDashboard() {
                     required
                     onChange={(e) => setCookiesType(e.target.value)}
                   >
+                    <option value="">Select ...</option>
                     <option value="Chocolate">Chocolate</option>
                     <option value="Vanilla">Vanilla</option>
                     <option value="Oatmeal">Oatmeal</option>
@@ -157,9 +160,10 @@ export default function SellerDashboard() {
                     required
                     onChange={(e) => setBakedTime(e.target.value)}
                   >
-                    <option value="day ago">day ago</option>
-                    <option value="week ago">week ago</option>
-                    <option value="month ago">month ago</option>
+                    <option value="">Select ...</option>
+                    <option value="a day ago">a day ago</option>
+                    <option value="a week ago">a week ago</option>
+                    <option value="a month ago">a month ago</option>
                   </select>
                 </Col>
               </Form.Group>

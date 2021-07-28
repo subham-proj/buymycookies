@@ -171,6 +171,10 @@ img {
   background-color: brown;
   color: #fff;
 }
+.bid_now:focus {
+  background-color: #d57f3a;
+  color: #fff;
+}
 
 .green {
   background: #85ad00;

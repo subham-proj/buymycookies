@@ -39,9 +39,6 @@ export default function Login() {
     }
   };
 
-  const handleForgot = () => {
-    alert("This functionality is under developement!");
-  };
   return (
     <div>
       <Container className="login_form">
@@ -81,11 +78,7 @@ export default function Login() {
         </Card>
       </Container>
       <h6 className="login_form_text">
-        <Link
-          to="/login"
-          onClick={handleForgot}
-          style={{ textDecoration: "none", color: "#d57f3a" }}
-        >
+        <Link to="/login" style={{ textDecoration: "none", color: "#d57f3a" }}>
           Forgot Password
         </Link>{" "}
       </h6>

@@ -2,18 +2,28 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import Posts from "./Posts/posts.js";
 import axios from "axios";
+import moment from "moment";
 
 export default function Dashboard() {
-  const [posts, setPosts] = useState([]);
+  const [allPosts, setAllPosts] = useState([]);
 
   useEffect(() => {
     async function fetchData() {
       const response = await axios.get("/posts");
-      setPosts(response.data);
+      setAllPosts(response.data);
     }
     fetchData();
   }, []);
 
+  let posts = [];
+  let today = new Date();
+  for (let i = 0; i < allPosts.length; i++) {
+    if (moment(today).isBefore(allPosts[i].bidding_end_date)) {
+      posts.push(allPosts[i]);
+    }
+  }
+
+  // Setting recent posts
   let recent = [];
 
   for (let i = 0; i < posts.length; i++) {
