@@ -4,8 +4,6 @@
 
 ## [Live Project](https://buymycookies.netlify.app/)
 
-<hr></hr>
-
 ## User Profile Categories
 
 - Buyer Only
