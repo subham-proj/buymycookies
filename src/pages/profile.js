@@ -1,8 +1,9 @@
 import React, { useContext, useState } from "react";
 import { Container, Form, Button, Col, Row, Card } from "react-bootstrap";
 import { Context } from "../context/context";
-
 import axios from "axios";
+
+const api = process.env.REACT_APP_API;
 
 export default function Profile() {
   // states to for assigning profile data
@@ -24,7 +25,7 @@ export default function Profile() {
     dispatch({ type: "UPDATE_START" });
 
     try {
-      const res = await axios.put("/users/" + user._id, {
+      const res = await axios.put(api + "/users/" + user._id, {
         userId: user._id,
         full_name: fullName ? fullName : user.full_name,
         username: username ? username : user.username,
@@ -113,6 +114,7 @@ export default function Profile() {
                   <Col sm={10} lg={6} md={6}>
                     <Form.Control
                       type="text"
+                      pattern="[a-zA-Z0-9]{3,12}"
                       placeholder={user.username}
                       onChange={(e) => setUsername(e.target.value)}
                     />
@@ -160,7 +162,8 @@ export default function Profile() {
                 {updateMode ? (
                   <Col sm={10} lg={6} md={6}>
                     <Form.Control
-                      type="number"
+                      type="tel"
+                      pattern="[1-9]{1}[0-9]{9}"
                       placeholder={user.contact}
                       onChange={(e) => setContact(e.target.value)}
                     />
@@ -245,6 +248,7 @@ export default function Profile() {
                     <Col sm={10} lg={6} md={6}>
                       <Form.Control
                         type="text"
+                        pattern="[a-zA-Z0-9]{8}"
                         placeholder={user.gstn}
                         onChange={(e) => setGSTN(e.target.value)}
                       />

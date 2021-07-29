@@ -3,6 +3,7 @@ import { Card, Container, Form, Button, Alert } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import "./auth.css";
+const api = process.env.REACT_APP_API;
 
 export default function Register() {
   // defining states for assingment according to Registration Form input
@@ -31,10 +32,10 @@ export default function Register() {
     e.preventDefault();
 
     // Checking if any user already exists in the database with same username/contact number or not
-    const user = await axios.get("/users");
+    const user = await axios.get(api + "/users");
 
     for (var x in user.data) {
-      const eachUser = await axios.get("/users/" + x);
+      const eachUser = await axios.get(api + "/users/" + x);
 
       if (
         eachUser.data.username === username ||
@@ -53,7 +54,7 @@ export default function Register() {
         /* if the user doesnot exists already in the database then the new user's data is
           ready to be registered */
         try {
-          const res = await axios.post("/auth/register", {
+          const res = await axios.post(api + "/auth/register", {
             full_name: fullName,
             username: username,
             email: email,

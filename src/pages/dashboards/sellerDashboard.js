@@ -4,6 +4,7 @@ import { Context } from "../../context/context";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import "./dashboards.css";
+const api = process.env.REACT_APP_API;
 
 export default function SellerDashboard() {
   // To assign all the posts in the database
@@ -15,7 +16,7 @@ export default function SellerDashboard() {
   // function to fetch all the posts and assign them to allPosts
   useEffect(() => {
     async function fetchData() {
-      const response = await axios.get("/posts");
+      const response = await axios.get(api + "/posts");
       setAllPosts(response.data);
     }
     fetchData();
@@ -33,7 +34,7 @@ export default function SellerDashboard() {
   // function to delete post
   const handleDelete = async (e) => {
     try {
-      await axios.delete(`/posts/${e._id}`, {
+      await axios.delete(`${api}/posts/${e._id}`, {
         data: { username: user.username },
       });
       window.location.replace("/");

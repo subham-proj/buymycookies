@@ -16,6 +16,8 @@ import {
 } from "react-bootstrap";
 import "./singlePost.css";
 
+const api = process.env.REACT_APP_API;
+
 export default function SinglePost() {
   // using useLocation to extract the path and then the id of the post
   const location = useLocation();
@@ -36,8 +38,8 @@ export default function SinglePost() {
   // function to fetch user details and post details simultaneously
   useEffect(() => {
     async function fetchData() {
-      const res = await axios.get("/posts/" + path);
-      const userNow = await axios.get("/users/@/" + user.username);
+      const res = await axios.get(api + "/posts/" + path);
+      const userNow = await axios.get(api + "/users/@/" + user.username);
       setUserDetails(userNow.data);
       setPost(res.data);
     }
@@ -61,7 +63,7 @@ export default function SinglePost() {
   // to delete post
   const handleDelete = async () => {
     try {
-      await axios.delete(`/posts/${path}`, {
+      await axios.delete(`${api}/posts/${path}`, {
         data: { username: user.username },
       });
       window.location.replace("/");
@@ -71,7 +73,7 @@ export default function SinglePost() {
   // to save updated post
   const handleUpdate = async () => {
     try {
-      await axios.put(`/posts/${path}`, {
+      await axios.put(`${api}/posts/${path}`, {
         username: user.username,
         title: title ? title : post.title,
         description: description ? description : post.description,
@@ -108,7 +110,7 @@ export default function SinglePost() {
   const handleNewBid = async () => {
     if (newBid > post.current_bid) {
       try {
-        await axios.put(`/posts/newBid/${path}`, {
+        await axios.put(`${api}/posts/newBid/${path}`, {
           current_bid: newBid,
         });
         window.location.reload();

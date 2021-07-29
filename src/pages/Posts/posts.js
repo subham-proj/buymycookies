@@ -2,8 +2,9 @@ import React, { useState, useEffect } from "react";
 import { Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import axios from "axios";
-
 import "./post.css";
+
+const api = process.env.REACT_APP_API;
 
 export default function Posts({ data }) {
   // for setting user details
@@ -12,7 +13,7 @@ export default function Posts({ data }) {
   // function to fetch user of the post and set to setUserDetails
   useEffect(() => {
     async function fetchUser() {
-      const response = await axios.get("/users/@/" + data.username);
+      const response = await axios.get(api + "/users/@/" + data.username);
       setUserDetails(response.data);
     }
     fetchUser();

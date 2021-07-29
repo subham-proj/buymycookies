@@ -3,6 +3,8 @@ import React, { useContext, useState } from "react";
 import { Container, Card, Col, Row, Form, Button } from "react-bootstrap";
 import { Context } from "../context/context";
 
+const api = process.env.REACT_APP_API;
+
 export default function SellerDashboard() {
   // all the neccessary states that will be needed to post a new product in the database
   const [title, setTitle] = useState("");
@@ -35,7 +37,7 @@ export default function SellerDashboard() {
     };
 
     try {
-      const res = await axios.post("/posts", newPost);
+      const res = await axios.post(api + "/posts", newPost);
       window.location.replace("/posts/" + res.data._id);
     } catch (err) {
       console.log(newPost);

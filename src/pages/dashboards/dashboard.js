@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import Posts from "../Posts/posts.js";
 import axios from "axios";
 import moment from "moment";
+const api = process.env.REACT_APP_API;
 
 export default function Dashboard() {
   // state to assign all the posts in the database
@@ -10,7 +11,7 @@ export default function Dashboard() {
 
   useEffect(() => {
     async function fetchData() {
-      const response = await axios.get("/posts");
+      const response = await axios.get(api + "/posts");
       setAllPosts(response.data);
     }
     fetchData();

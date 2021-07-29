@@ -4,8 +4,9 @@ import { Link } from "react-router-dom";
 
 import { Context } from "../../context/context";
 import axios from "axios";
-
 import "./auth.css";
+
+const api = process.env.REACT_APP_API;
 
 export default function Login() {
   // assign username and password using useRef Hook (could have used useState hook also)
@@ -19,7 +20,7 @@ export default function Login() {
 
     dispatch({ type: "LOGIN_START" });
     try {
-      const res = await axios.post("/auth/login", {
+      const res = await axios.post(api + "/auth/login", {
         username: usernameRef.current.value,
         password: passwordRef.current.value,
       });
